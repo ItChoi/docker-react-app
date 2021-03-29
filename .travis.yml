@@ -9,3 +9,15 @@ script:
   - docker run -e CI=true itchoi0429/docker-react-app npm run test -- --coverage
 after_success:
   - echo "Test success"
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-northeast-2"
+  app: "docker-a"
+  env: "Dockera-env"
+  bucket_name: "elasticbeanstalk-ap-northeast-2-656437836469"
+  bucket_path: "docker-a"
+  on:
+    branch: master
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key: $AWS_SECRET_ACCESS_KEY
